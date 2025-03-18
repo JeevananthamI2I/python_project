@@ -29,6 +29,6 @@ class BaseModel():
     def __str__(self):
         return f"{self.created_at} {self.updated_at} {self.is_deleted}"
 
-bm = BaseModel()
-print(bm)
+# bm = BaseModel()
+# print(bm)
         

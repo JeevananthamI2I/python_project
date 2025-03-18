@@ -1,5 +1,7 @@
+import sys 
+sys.path.append('C:\\PythonLearning\\bank_management\\app')
 
-from base_model import BaseModel
+from models.base_model import BaseModel
 
 class Customer(BaseModel):
     def __init__(self,customer_id, customer_name, mobile_number, address, **kwargs):
@@ -40,5 +42,5 @@ class Customer(BaseModel):
     def __str__(self):
         return f"{self.customer_id} {self.customer_name} {self.mobile_number} {self.address} {self.created_at} {self.updated_at} {self.is_deleted}"
 
-u = Customer(1, "jeeva", "9122324320", "Chennai")
-print(u)
+# u = Customer(1, "jeeva", "9122324320", "Chennai")
+# print(u)
