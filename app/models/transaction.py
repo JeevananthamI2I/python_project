@@ -63,6 +63,6 @@ class Transaction(BaseModel):
     
     def __str__(self):
         return f"{self.transaction_id} {self.bank_account_id} {self.transaction_type} {self.amount} {self.start_date} {self.end_date} {self.created_at} {self.updated_at} {self.is_deleted}"
-T = Transaction(1,1,"credit",1000,datetime.now(),datetime.now())
-print(T)
+# T = Transaction(1,1,"credit",1000,datetime.now(),datetime.now())
+# print(T)
    
