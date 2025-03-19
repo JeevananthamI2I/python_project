@@ -6,6 +6,7 @@ from services.customer_service import CustomerService
 class CustomerController:
     def __init__(self):
         self.customer_service = CustomerService()
+    
 
     def create_customer(self, customer_data):
         result = self.customer_service.add_customer(customer_data)

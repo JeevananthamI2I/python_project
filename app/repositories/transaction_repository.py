@@ -1,11 +1,35 @@
-from  app.db.database import Database
+import sys 
+sys.path.append('C:\\PythonLearning\\bank_management\\app')
+
+from  db.database import Database
 
 class TransactionRepository():
     def __init__(self):
         self.db = Database()
         self.table = "transactions"
         self.columns = ["transaction_id", "account_id", "amount", "transaction_type", "transaction_date"]
+    
+    def create_enum(self):
+        query = """CREATE TYPE transaction_type_enum AS ENUM ('CREDIT', 'DEBIT');
+        """
+        return self.db.execute(query)
+    
+    def create_table(self):
+        query = """
+        CREATE TABLE transactions (
+        transaction_id SERIAL PRIMARY KEY,
+        account_number INT NOT NULL,
+        amount NUMERIC NOT NULL,
+        transaction_type transaction_type_enum NOT NULL,
+        transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (account_number) REFERENCES accounts(account_number) 
+        ON DELETE CASCADE
+        );
 
+        """
+        return self.db.execute(query)
     def get(self, transaction_id):
         query = f"SELECT * FROM {self.table} WHERE transaction_id = %s"
         self.db.execute(query, (transaction_id,))
@@ -110,3 +134,7 @@ class TransactionRepository():
         query = f"SELECT COUNT(*) FROM {self.table} WHERE account_id = %s AND transaction_date BETWEEN %s AND %s"       
         self.db.execute(query, (account_id, start_date, end_date))
         return self.db.fetch_one()
+    
+TR=TransactionRepository()
+TR.create_table()
+# TR.create(1000, "CREDIT",12/3/2025)

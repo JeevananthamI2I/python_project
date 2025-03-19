@@ -1,13 +1,15 @@
 import os
 import psycopg2
 from psycopg2 import sql
+from dotenv import load_dotenv
 
+load_dotenv() 
 class Database:
     def __init__(self, dbname=None, user=None, password=None, host=None, port=5432):
-        self.dbname = dbname or os.getenv("DB_NAME", "mytest")
-        self.user = user or os.getenv("DB_USER", "postgres")
-        self.password = password or os.getenv("DB_PASSWORD", "jeeva")
-        self.host = host or os.getenv("DB_HOST", "localhost")
+        self.dbname = dbname or os.getenv("DB_NAME")
+        self.user = user or os.getenv("DB_USER")
+        self.password = password or os.getenv("DB_PASSWORD")
+        self.host = host or os.getenv("DB_HOST")
         self.port = port or int(os.getenv("DB_PORT", 5432))
 
         self.connection = None
@@ -54,5 +56,7 @@ class Database:
         if self.connection:
             self.connection.close()
             print("DB connection closed.")
+
+# Database()
 
 # db= Database(dbname="mytest", user="postgres", password="jeeva", host="localhost")
