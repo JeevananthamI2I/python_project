@@ -1,6 +1,5 @@
 import sys 
 sys.path.append('C:\\PythonLearning\\bank_management\\app')
-# print(sys.path)
 from db.database import Database
 
 class AuthRepository():
@@ -33,7 +32,7 @@ class AuthRepository():
     def close(self):
         self.db.close()
 
-ar= AuthRepository()
+# ar= AuthRepository()
 # ar.create_table_admin()
-ar.create_admin("admin", "admin123")
+# ar.create_admin("admin", "admin123")
 # print()

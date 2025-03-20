@@ -43,6 +43,12 @@ class Database:
             print(f"Query failed: {e}")
             self.connection.rollback()
             return False
+        
+    def execute_and_return(self, query, params):
+        self.cursor.execute(query, params)
+        result = self.cursor.fetchone()
+        self.connection.commit()
+        return result
 
     def fetch_one(self):
         return self.cursor.fetchone() if self.cursor else None

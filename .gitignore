@@ -1,4 +1,16 @@
-.venv/
+# Ignore Python cache and compiled files
 __pycache__/
 *.pyc
-.env
+
+# Ignore virtual environments
+.env/
+.venv/
+env/
+venv/
+
+# Ignore log files
+*.log
+
+# Ignore OS and editor files
+.DS_Store
+Thumbs.db
