@@ -24,6 +24,7 @@ class TransactionRepository():
         transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        is_deleted BOOLEAN DEFAULT FALSE,
         FOREIGN KEY (account_number) REFERENCES accounts(account_number) 
         ON DELETE CASCADE
         );
@@ -135,6 +136,8 @@ class TransactionRepository():
         self.db.execute(query, (account_id, start_date, end_date))
         return self.db.fetch_one()
     
-TR=TransactionRepository()
-TR.create_table()
+        
+# TR=TransactionRepository()
+# TR.alter_transaction_table()
+# TR.create_table()
 # TR.create(1000, "CREDIT",12/3/2025)
