@@ -9,8 +9,8 @@ class CustomerController():
         self.customer_service = CustomerService()
         # self.customer = Customer()
 
-    def create_customer(self, customer_name,mobile_number,address,dob,account_type):
-        result = self.customer_service.add_customer(customer_name,mobile_number,address,dob,account_type)
+    def create_customer(self, customer_name,mobile_number,address,dob,age,account_type):
+        result = self.customer_service.add_customer(customer_name,mobile_number,address,dob,age,account_type)
         return result
 
     def update_register_customer(self, customer_data):
