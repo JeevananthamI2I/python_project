@@ -1,16 +1,30 @@
-# Ignore Python cache and compiled files
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
+dist/
+build/
 
-# Ignore virtual environments
-.env/
-.venv/
-env/
+# Virtual env
 venv/
+envs/
 
-# Ignore log files
+# Logs
+logs/
 *.log
 
-# Ignore OS and editor files
+# DB
+*.db
+*.sqlite3
+
+# Secrets
+.env
+.env.*
+
+# IDEs
+.vscode/
+.idea/
+
+# System
 .DS_Store
 Thumbs.db
