@@ -1,18 +1,27 @@
-class TransactionService():
-    def __init__(self, transaction_repository):
-        self.transaction_repository = transaction_repository
+import sys 
+sys.path.append('C:\\PythonLearning\\bank_management\\app')
 
-    def create_transaction(self, transaction):
-        self.transaction_repository.create_transaction(transaction)
+# transaction_service.py
 
-    def get_transaction(self, transaction_id):
-        return self.transaction_repository.get_transaction(transaction_id)
+from app.repositories.transaction_repository import TransactionRepository
+from app.models.transaction import Transaction
 
-    def get_transactions(self):
-        return self.transaction_repository.get_transactions()
+class TransactionService:
+    def __init__(self):
+        self.transaction_repo = TransactionRepository()
+        self.transaction_obj = Transaction
 
-    def update_transaction(self, transaction_id, transaction):
-        self.transaction_repository.update_transaction(transaction_id, transaction)
+    def create_transaction(self, transaction_data):
+        # Create a Transaction model object using correct dict access
+        transaction_obj = Transaction(
+            account_id=transaction_data["account_id"],
+            transaction_type=transaction_data["transaction_type"],
+            amount=transaction_data["amount"]
+        )
+        return self.transaction_repo.create_transaction(transaction_obj)
 
-    def delete_transaction(self, transaction_id):
-        self.transaction_repository.delete_transaction(transaction_id)
+    def get_transactions_by_account(self, account_id):
+        return self.transaction_repo.get_transactions_by_account(account_id)
+
+    def get_transaction(self, start_date,end_date,customer_id):
+        return self.transaction_repo.get_transaction(start_date,end_date, customer_id)

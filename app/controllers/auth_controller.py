@@ -1,26 +1,29 @@
 import sys 
 sys.path.append('C:\\PythonLearning\\bank_management\\app')
 
+import logging
 from services import AuthService
 
-class AuthController():
+logger = logging.getLogger(__name__)
+
+class AuthController:
     def __init__(self, auth_service=None):
         self.auth_service = auth_service or AuthService()
 
-    
-    #admin create and login for accounts
     def create_admin(self, admin_id, password):
-        result = self.auth_service.create_admin(admin_id, password)
-        return result
-    
-    def admin_login(self, admin_id, password):
-        is_admin = self.auth_service.admin(admin_id, password)
-        return is_admin
-    
+        try:
+            result = self.auth_service.create_admin(admin_id, password)
+            logger.info(f"Admin created: {admin_id}")
+            return result
+        except Exception as e:
+            logger.error(f"Error creating admin: {e}")
+            raise Exception("Failed to create admin.") from e
 
-    #  def user_login(self, customer_id, password):
-    #     is_user = self.auth_service.login(customer_id, password)
-    #     return is_user
-    
-    # def user_register(self, login_data):
-    #     return self.auth_service.user_registeration(login_data)
+    def admin_login(self, admin_id, password):
+        try:
+            is_admin = self.auth_service.admin(admin_id, password)
+            logger.info(f"Admin login attempted: {admin_id}")
+            return is_admin
+        except Exception as e:
+            logger.error(f"Admin login failed: {e}")
+            raise Exception("Admin login failed.") from e
