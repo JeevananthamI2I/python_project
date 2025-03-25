@@ -52,7 +52,7 @@ class CustomerController:
     def get_all_customers(self):
         try:
             customers = self.customer_service.get_all_customers()
-            result = clean_and_print_customers(customers)
+            result = self.clean_and_print_customers(customers)
             logger.info("Fetched all customers")
             return result
         except Exception as e:
@@ -79,19 +79,19 @@ class CustomerController:
 
 
 ####___________helper function_____________####
-def clean_and_print_customers(self,customers):
-    cleaned_list = []
+    def clean_and_print_customers(self,customers):
+        cleaned_list = []
 
-    for customer in customers:
-        dob = customer['dob']
-        cleaned_customer = {
-            "Customer ID": customer['customer_id'],
-            "Name": customer['name'],
-            "Mobile": customer['mobile'],
-            "Address": customer['address'],
-            "Date of Birth": dob.strftime("%Y-%m-%d"),
-            "Age": customer['age']
-        }
-        cleaned_list.append(cleaned_customer)
+        for customer in customers:
+            dob = customer['dob']
+            cleaned_customer = {
+                "Customer ID": customer['customer_id'],
+                "Name": customer['name'],
+                "Mobile": customer['mobile'],
+                "Address": customer['address'],
+                "Date of Birth": dob.strftime("%Y-%m-%d"),
+                "Age": customer['age']
+            }
+            cleaned_list.append(cleaned_customer)
 
-    print(json.dumps(cleaned_list, indent=4))
+        print(json.dumps(cleaned_list, indent=4))

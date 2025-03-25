@@ -14,51 +14,6 @@ class BankAccountRepository:
         self.db = Database()
         self.table = "accounts"
 
-    def create_enum(self):
-        query = """
-        CREATE TYPE bank_account_enum AS ENUM ('Savings Account', 'Current Account');
-        """
-        try:
-            self.db.execute(query)
-            logger.info("Enum type 'bank_account_enum' created successfully.")
-            return True
-        except Exception as e:
-            logger.error(f"Failed to create enum type: {e}")
-            return False
-
-    def create_table(self):
-        query = """
-        CREATE TABLE accounts (
-            account_id SERIAL PRIMARY KEY,
-            customer_id INT NOT NULL,
-            account_number INT NOT NULL UNIQUE,
-            account_type bank_account_enum NOT NULL,
-            balance NUMERIC DEFAULT 0,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            is_deleted BOOLEAN DEFAULT FALSE,
-            FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
-                ON DELETE CASCADE
-        );
-        """
-        try:
-            self.db.execute(query)
-            logger.info("Table 'accounts' created successfully.")
-            return True
-        except Exception as e:
-            logger.error(f"Failed to create table: {e}")
-            return False
-
-    def alter_accounts_table(self):
-        query = "ALTER TABLE accounts ADD COLUMN IF NOT EXISTS is_deleted BOOLEAN DEFAULT FALSE"
-        try:
-            self.db.execute(query)
-            logger.info("Table 'accounts' altered successfully.")
-            return True
-        except Exception as e:
-            logger.error(f"Failed to alter table: {e}")
-            return False
-
     def add_bank_account(self, account_data: BankAccount):
         query = f"""
         INSERT INTO {self.table} (account_number, customer_id, balance, account_type)
@@ -152,3 +107,5 @@ class BankAccountRepository:
         except Exception as e:
             logger.error(f"Error checking account existence: {e}")
             return False
+        
+

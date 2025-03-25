@@ -12,28 +12,6 @@ class CustomerRepository:
         self.db = Database()
         self.table = "customers"
 
-    def customer_create_table(self):
-        query = """
-        CREATE TABLE IF NOT EXISTS customers (
-            customer_id SERIAL PRIMARY KEY,
-            name TEXT NOT NULL,
-            mobile TEXT NOT NULL,
-            address TEXT NOT NULL,
-            dob DATE,
-            password TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            is_deleted BOOLEAN DEFAULT FALSE
-        );
-        """
-        try:
-            self.db.execute(query)
-            logger.info("Customer table created successfully.")
-            return True
-        except Exception as e:
-            logger.error(f"Failed to create customer table: {e}")
-            return False
-
     def get_all_customers(self):
         columns = ["customer_id", "name", "mobile", "address","age", "dob"]
         query = f"SELECT {', '.join(columns)} FROM {self.table} WHERE is_deleted = FALSE"
@@ -48,8 +26,8 @@ class CustomerRepository:
 
     def add_customer(self, customer):
         query = f"""
-        INSERT INTO {self.table} (name, mobile, address, dob, password)
-        VALUES (%s, %s, %s, %s, %s) RETURNING customer_id;
+        INSERT INTO {self.table} (name, mobile, address, dob, password, age)
+        VALUES (%s, %s, %s, %s, %s, %s) RETURNING customer_id;
         """
         try:
             result = self.db.execute_and_return(query, (
@@ -57,7 +35,8 @@ class CustomerRepository:
                 customer.mobile_number,
                 customer.address,
                 customer.dob,
-                customer.password
+                customer.password,
+                customer.age
             ))
             return result[0] if result else None
         except Exception as e:

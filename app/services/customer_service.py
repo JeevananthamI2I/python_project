@@ -30,7 +30,6 @@ class CustomerService():
     def calculate_age(self,dob):
         if not isinstance(dob, date):
             raise ValueError("DOB must be a date object")
-        
         today = date.today()
         return today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
 

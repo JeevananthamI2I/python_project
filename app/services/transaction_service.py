@@ -22,3 +22,6 @@ class TransactionService:
 
     def get_transactions_by_account(self, account_id):
         return self.transaction_repo.get_transactions_by_account(account_id)
+
+    def get_transaction(self, start_date,end_date,customer_id):
+        return self.transaction_repo.get_transaction(start_date,end_date, customer_id)

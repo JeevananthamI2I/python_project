@@ -45,3 +45,25 @@ class TransactionRepository:
         except Exception as e:
             logger.error(f"Failed to retrieve transactions for account ID {account_id}: {e}")
             return []
+
+    def get_transaction(self,start_date,end_date,customer_id):
+        query = f"""SELECT t.transaction_id, t.account_id, t.transaction_type,
+        t.amount, t.transaction_date
+        FROM transactions t
+        JOIN accounts a ON t.account_id = a.account_id
+        JOIN customers c ON a.customer_id = c.customer_id
+        WHERE c.customer_id = %s 
+        AND t.transaction_date BETWEEN %s AND %s
+        ORDER BY t.transaction_date DESC;
+        """
+        try:
+            self.db.execute(query,(customer_id,start_date,end_date))
+            result = self.db.fetch_all()
+            if result:
+                columns = [
+                    "transaction_id", "account_id", "transaction_type", "amount", "transaction_date"
+                ]
+                return dict(zip(columns, result))
+            return None
+        except:
+            logger.error(f"Failed to retrieve transactions for account ID {customer_id}: {e}")

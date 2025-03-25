@@ -8,25 +8,6 @@ class AuthRepository:
         self.db = Database()
         self.table = "admin"
 
-    def create_admin_table(self):
-        """
-        Creates the admin table if it does not exist.
-        """
-        query = """
-        CREATE TABLE IF NOT EXISTS admin (
-            id SERIAL PRIMARY KEY,
-            login_id VARCHAR(255) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL
-        );
-        """
-        try:
-            self.db.execute(query)
-            logger.info("Admin table created successfully.")
-            return True
-        except Exception as e:
-            logger.error(f"Failed to create admin table: {e}")
-            return False
-
     def add_admin(self, login_id, password):
         """
         Inserts a new admin into the admin table.

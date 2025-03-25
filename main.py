@@ -6,7 +6,6 @@ from app.models.customer import Customer
 from app.enums import AccountType
 from app.utils.validation import Validation
 
-import getpass
 import logging 
 from logs.logging_config import setup_logging
 
@@ -111,7 +110,7 @@ class Main:
     def admin_login_menu(self):
         print("\n--- Admin Login ---")
         admin_id = input("Enter your admin ID:\n:: ")
-        password = input("Enter your admin password")
+        password = input("Enter your admin password::\n::")
 
         try:
             login_success = self.auth_controller.admin_login(admin_id, password)
@@ -154,7 +153,7 @@ class Main:
         print("\n--- Create New Customer Account ---")
         name = input("Enter full name:\n:: ")
         mobile = self.validation.get_validated_mobile_number()
-        dob = self.validation.get_validated_dob()
+        dob = self.validation.get_validated_date("Enter date of birth (DD/MM/YYYY):\n:: ")
         address = input("Enter address:\n:: ")
         print("Account Types:\n1. Savings Account\n2. Current Account\n3. Fixed Deposit")
         try:
@@ -268,11 +267,22 @@ class Main:
             logger.error(f"Check Blance error: {e}")
             print("An error occurred during chack balance.")
 
-    def view_transaction(self,customer_id):
-        try:
-            result = self.transaction_controller.view_transaction(start_date,end_date,customer_id)
-        except:
-            p
+    def view_transaction_history(self,customer_id):
+        start_date= input("Enter your start date..?::")
+        end_date= input("Enter your end date..?::")
+        is_valid= self.validation.compare_dates(start_date,end_date)
+        start_date = self.validation.safe_convert_date(start_date)
+        end_date = self.validation.safe_convert_date(end_date)
+
+        if is_valid:
+            try:
+                result = self.transaction_controller.view_transaction(start_date,end_date,customer_id)
+                logger.info(result)
+            except:
+                logger.error("Error occured in date")
+        else:
+            logger.info("Invalid Dates")
+            
     def view_account(self,customer_id):
         try:
             result = self.customer_controller.view_account(customer_id)
@@ -280,8 +290,6 @@ class Main:
         except Exception as e:
             logger.error(f"Account_details error: {e}")
             print("An error occurred during view account.")
-
-    # TODO: Implement `withdraw_amount`, `check_balance`, `view_transaction_history`, `view_account_details`
 
 if __name__ == '__main__':
     setup_logging
