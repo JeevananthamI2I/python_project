@@ -1,0 +1,17 @@
+<!-- templates/trips/trip_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Trips</title>
+</head>
+<body>
+    <h1>Available Trips</h1>
+    <ul>
+        {% for trip in trips %}
+            <li>
+                <a href="{% url 'book_trip' trip.id %}">{{ trip.origin }} to {{ trip.destination }} on {{ trip.start_time }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
