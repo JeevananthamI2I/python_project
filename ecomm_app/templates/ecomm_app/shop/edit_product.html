@@ -1,0 +1,13 @@
+"""
+{% extends 'ecomm_app/shop/base.html' %}
+
+{% block content %}
+    <h2>Edit Product</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p|add_class:"form-control" }}
+        <button type="submit">Update</button>
+    </form>
+    <a href="{% url 'product_detail' form.instance.pk %}">Cancel</a>
+{% endblock %}
+"""

@@ -1,0 +1,13 @@
+"""
+{% extends 'ecomm_app/shop/base.html' %}
+
+{% block content %}
+    <h2>Add Product</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add</button>
+    </form>
+    <a href="{% url 'product_list' %}">Back to list</a>
+{% endblock %}
+"""

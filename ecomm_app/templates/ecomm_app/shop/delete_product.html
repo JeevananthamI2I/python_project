@@ -1,0 +1,13 @@
+"""
+{% extends 'ecomm_app/shop/base.html' %}
+
+{% block content %}
+    <h2>Delete Product</h2>
+    <p>Are you sure you want to delete "{{ product.product_name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        <a href="{% url 'product_detail' product.pk %}">Cancel</a>
+    </form>
+{% endblock %}
+"""

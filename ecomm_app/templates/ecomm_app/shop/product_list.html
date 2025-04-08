@@ -1,0 +1,24 @@
+"""
+{% extends 'ecomm_app/shop/base.html' %}
+
+{% block content %}
+    <h2>All Products</h2>
+    <form method="get">
+        <select name="category" onchange="this.form.submit()">
+            <option value="">All Categories</option>
+            {% for cat in categories %}
+                <option value="{{ cat.name }}">{{ cat.name }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <br>
+    {% for product in products %}
+        <div>
+            <h3><a href="{% url 'product_detail' product.pk %}">{{ product.product_name }}</a></h3>
+            <p>₹{{ product.price }}</p>
+        </div>
+    {% endfor %}
+    <a href="{% url 'add_product' %}">Add New Product</a>
+    <a href="{% url 'add_category' %}">Add Category</a>
+{% endblock %}
+"""

@@ -1,0 +1,16 @@
+"""
+{% extends 'ecomm_app/shop/base.html' %}
+
+{% block content %}
+    <h2>{{ product.product_name }}</h2>
+    <p>{{ product.feature }}</p>
+    <p>Price: ₹{{ product.price }}</p>
+    <p>Category: {{ product.product_category.name }}</p>
+    <a href="{% url 'product_list' %}">Back to list</a>
+    <a href="{% url 'edit_product' product.pk %}">Edit</a>
+    <form method="post" action="{% url 'delete_product' product.pk %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+{% endblock %}
+"""
