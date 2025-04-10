@@ -1,24 +1,36 @@
-"""
+
 {% extends 'ecomm_app/shop/base.html' %}
 
 {% block content %}
     <h2>All Products</h2>
-    <form method="get">
-        <select name="category" onchange="this.form.submit()">
-            <option value="">All Categories</option>
-            {% for cat in categories %}
-                <option value="{{ cat.name }}">{{ cat.name }}</option>
-            {% endfor %}
-        </select>
-    </form>
     <br>
-    {% for product in products %}
-        <div>
-            <h3><a href="{% url 'product_detail' product.pk %}">{{ product.product_name }}</a></h3>
-            <p>₹{{ product.price }}</p>
-        </div>
-    {% endfor %}
-    <a href="{% url 'add_product' %}">Add New Product</a>
-    <a href="{% url 'add_category' %}">Add Category</a>
+    <table border="1" cellspacing="0" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>
+                {% if product.pk %}
+                    <a href="{% url 'product_detail' product.pk %}">{{ product.product_name }}</a>
+                {% else %}
+                    {{ product.product_name }}  <!-- Show without link -->
+                {% endif %}
+                    
+                </td>
+                <td>{{ product.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    {% comment %} <button type="button" onclick="window.location.href='{% url 'product_detail' product.pk %}'">View Product</button><br>     {% endcomment %}
+    <button type="button" onclick="window.location.href='{% url 'add_product' %}'">Add New Product</button><br>
+    <br>
+    <button type="button" onclick="window.location.href='{% url 'add_category' %}'">Manage Categories</button>
 {% endblock %}
-"""
+
