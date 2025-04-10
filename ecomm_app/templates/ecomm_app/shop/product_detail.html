@@ -1,16 +1,46 @@
-"""
+
 {% extends 'ecomm_app/shop/base.html' %}
 
 {% block content %}
-    <h2>{{ product.product_name }}</h2>
-    <p>{{ product.feature }}</p>
-    <p>Price: ₹{{ product.price }}</p>
-    <p>Category: {{ product.product_category.name }}</p>
+<table border="1" cellspacing="0" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price (₹)</th>
+            <th>Category</th>
+            <th>Features</th>
+            <th>Edit</th>
+            <th>Delete</th> <!-- Rename for clarity -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ product.product_name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.product_category.name }}</td>
+            <td>{{ product.feature }}</td>
+            <td>
+                {% if product.pk %}
+                    <a href="{% url 'edit_product' product.pk %}">Edit</a>
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td>
+                {% if product.pk %}
+                <form method="post" action="{% url 'delete_product' product.pk %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
     <a href="{% url 'product_list' %}">Back to list</a>
-    <a href="{% url 'edit_product' product.pk %}">Edit</a>
-    <form method="post" action="{% url 'delete_product' product.pk %}" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit">Delete</button>
-    </form>
 {% endblock %}
-"""
+
