@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.product_list, name='product_list'),
-    path('product/<int:pk>/', views.product_detail, name='product_detail'),  # Ensure this line exists
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
     path('product/add/', views.add_product, name='add_product'),
     path('add-category/', views.add_category, name='add_category'),
     path('', views.category_list, name='category_list'),

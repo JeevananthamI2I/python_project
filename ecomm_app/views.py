@@ -1,6 +1,32 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib import messages
+
 from .models import Product, Category
 from .forms import ProductForm, CategoryForm
+
+def home(request):
+    if not request.user.is_authenticated:
+        return redirect('login.html')
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, 'User does not exist')
+            return redirect('ecomm_app/registeration/login.html')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            messages.error(request, "Invalid Password")
+            return redirect('ecomm_app/registeration/login.html')
+        else:
+            login(request, user)
+            return redirect('home')
 
 def product_list(request):
     products = Product.objects.all()
