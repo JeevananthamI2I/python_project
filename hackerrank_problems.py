@@ -11,6 +11,7 @@ def condition_act(n):
         
 condition_act(3)
 
+
 def arithmatic_opration():
     a = 2
     b = 5
@@ -24,8 +25,8 @@ arithmatic_opration()
 def square_of_range():
     n=6
     list1=[i*i for i in range(n) if n>0]
-    for i in list1:
-        print(i)
+    for i in range(n):
+        print(i*i)
 square_of_range()
     
 def string_number():   
@@ -81,12 +82,11 @@ def marks():
     n = 3
     student_marks={"Krishna":[67, 68, 69],"Arjun":[70, 98, 63],"Malika":[52 ,56 ,60]}
     st_marks = student_marks.get("Malika","key invalid")
-    avg_mark=0
-    count =0
+    count= avg_mark= 0
     for i in st_marks:
          avg_mark +=i   
          count +=1
-    re = format((avg_mark/count),".2f")
+    re = format((sum(st_marks)/len(st_marks)),".2f")
     print (re)
     
 marks()
@@ -149,8 +149,100 @@ def nested_list_p1():
     print('\n'.join(sorted(i[0] for i in student if i[1] == min(list2))))
 
     
-nested_list_p1()
+# nested_list_p1()
 
+def swap_case():
+    str1="Jeeva"
+    # str2=str1.swapcase()
+    str2 =""
+    for i in str1:
+        if 'A'<= i <='Z':
+            str2 +=chr(ord(i)+32)
+        elif 'a' <= i <='z':
+            str2 +=chr(ord(i)-32)
+        else:
+            str2 +=i
+    print(str2)
+swap_case()
 
-    
-    
+def split_str():
+    line='hi world'
+    # line1=line.replace(" ",'-')
+    str1=''.join( '-' if ord(i)==32 else i for i in line)
+    print(str1)
+split_str()
+
+def print_full_name(first, last):
+    # Write your code here
+    print(f'Hello {first} {last}! You just delved into python.')
+print_full_name("jee","va")
+def mutate_string(string, position, character):
+    print(list(string))
+    list1= list(string)
+    list1[position]=character
+    print (''.join(list1))
+
+mutate_string('jeeva',0,'A')
+
+def hr_pramid_prblm():
+    #Replace all ______ with rjust, ljust or center. 
+
+    thickness = 5 #This must be an odd number
+    c = 'H'
+    print(c.rjust(4)+c+c)
+
+    #Top Cone
+    for i in range(thickness):
+        print((c*i).rjust(thickness-1)+c+(c*i).ljust(thickness-1))
+
+    # Top Pillars
+    for i in range(thickness+1):
+        print((c*thickness).center(thickness*2)+(c*thickness).center(thickness*6))
+
+    #Middle Belt
+    for i in range((thickness+1)//2):
+        print((c*thickness*5).center(thickness*6))    
+
+    #Bottom Pillars
+    for i in range(thickness+1):
+        print((c*thickness).center(thickness*2)+(c*thickness).center(thickness*6))    
+
+    # #Bottom Cone
+    for i in range(thickness):
+        print(((c*(thickness-i-1)).rjust(thickness)+c+(c*(thickness-i-1)).ljust(thickness)).rjust(thickness*6))
+hr_pramid_prblm()
+
+str1="adfghjjjjjksd"
+import textwrap
+
+def wrap(string, max_width):
+    inilen = 0
+
+    for i in range(len(string)):
+
+        print(string[i],end ='')
+        inilen+=1
+        if inilen == max_width:
+            inilen = 0
+            print('\n',end='')
+
+    return ''
+
+def designer_door_mat():
+    n, m = map(int, input().split())
+    for i in range(1, n, 2):
+        print((".|." * i).center(m, "-"))
+    print("WELCOME".center(m, "-"))
+    for i in range(n-2, 0, -2):
+        print((".|." * i).center(m, "-"))
+        
+import string
+def print_rangoli(size):
+    a=list(string.ascii_lowercase)[:size]
+    temp=a[::-1]
+    n=(size-1)*4 +1
+    for i in range(1,size+1):
+        print('-'.join(temp[:i]+((temp[:i])[::-1])[1:]).center(n,'-'))
+    for i in range(size-1,0,-1):
+        print('-'.join(temp[:i]+((temp[:i])[::-1])[1:]).center(n,'-'))
+
