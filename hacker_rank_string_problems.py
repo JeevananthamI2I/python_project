@@ -1,8 +1,9 @@
 import string
+import cmath
+import math
 from itertools import product
 from itertools import permutations
 from functools import reduce
-
 
 
 def swap_case():
@@ -17,7 +18,7 @@ def swap_case():
         else:
             str2 +=i
     print(str2)
-
+# swap_case()
 def split_str():
     line='hi world'
     # line1=line.replace(" ",'-')
@@ -121,15 +122,44 @@ def average(array):
     print(sum(set(array))/len(set(array)))
 
 def exception_program():
-    a=3
-    b=1
+    n=input().split()
+    for _ in range(int(n[0])):
+        try:
+            text=input().split()
+            print(int(text[0])//int(text[1]))
+        except (ValueError, ZeroDivisionError) as e:
+            print("Error code:",e)
     
-    try:
-        print(a//b)
-    except (ZeroDivisionError,ValueError) as e:
-        print ("Error Code:",e)
 
-exception_program()      
+def set_example():
+    s=set('HelloWorld')
+    s.add('helloworld')
+    # counter(s)
+    print(s)
+    
+def polar_co_ordinates():
+    z = complex(input())
+    abs_value = abs(z)
+    phi = cmath.phase(z)
+    print(abs_value)
+    print(phi)
+    
+def find_angle():
+    a= float(input())
+    b = float(input())
+    r = math.atan2(a,b)
+    print(r)
+    d = math.degrees(r)
+    print(int(round(d)),chr(176),sep="")
+    
+
+
+
+# find_angle()
+# polar_co_ordinates()
+# set_example()
+# print(ord('a'))
+# exception_program()      
 # average([161, 182, 161, 154, 176, 170, 167, 171, 170, 174])
 
 # permutation_prblm()
