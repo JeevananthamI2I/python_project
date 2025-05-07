@@ -4,7 +4,8 @@ import math
 from itertools import product
 from itertools import permutations
 from functools import reduce
-
+from itertools import combinations
+from itertools import combinations_with_replacement
 
 def swap_case():
     str1="Jeeva"
@@ -152,9 +153,30 @@ def find_angle():
     d = math.degrees(r)
     print(int(round(d)),chr(176),sep="")
     
+def maximize_example():
+    from itertools import product
+    N, M = map(int, (input().split()))
+    s = list(product(*[map(int, input()[1:].split()) for _ in range(N)]))
+    prod = []
+    for i in s:
+        k = sum(x**2 for x in i)%M
+        prod.append(k)
+        
+    print(max(prod))
 
+def combination_example():
+    n, m = input().split()
+    for i in range(1,int(m)+1):
+        for combo in combinations(sorted(n),i):
+            print("".join(combo))
 
-
+def combination_with_replacement_example():
+    S, k = input().split()
+    for c in combinations_with_replacement(sorted(S), int(k)):
+        print(''.join(c))
+combination_with_replacement_example()
+#combination_example
+#maximize_example()
 # find_angle()
 # polar_co_ordinates()
 # set_example()

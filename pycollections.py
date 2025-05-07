@@ -86,14 +86,26 @@ def set_difference_ex():
     s2 = set(map(int, input().split()))
     print(len(s1.intersection(s2)))
     
-def symmetric_difference_ex():
+def set_or_example():
     s1 = set(map(int, input().split()))
     s2 = set(map(int, input().split()))
-    print(len(s1.symmetric_difference(s2)))
+    print(len(s1|(s2)))
+    
+def captain_room():
+    from collections import Counter
+
+    K = int(input())
+    room_numbers = list(map(int, input().split()))
+    counter = Counter(room_numbers)
+
+    for room, count in counter.items():
+        if count == 1:
+            print(room)
+            break
     
 set_difference_ex()
 set_intersection_ex()
-symmetric_difference_ex()
+set_or_example()
 # most_commons_ex()
 # pillingUp_example()
 # default_dict_example()
