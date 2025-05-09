@@ -102,10 +102,21 @@ def captain_room():
         if count == 1:
             print(room)
             break
-    
-set_difference_ex()
-set_intersection_ex()
-set_or_example()
+
+def python_quest_1(): 
+    n=int(input())
+    # # print(i: for i in range(int(input())))
+    for i in range(1,n+1):
+        print(i**-1)
+        # print(10**i-1)
+        print("iiii",i)
+        print((10**i-1)//9)
+        # print(i*((10**i-1)//9))
+python_quest_1()
+
+# set_difference_ex()
+# set_intersection_ex()
+# set_or_example()
 # most_commons_ex()
 # pillingUp_example()
 # default_dict_example()

@@ -1,3 +1,4 @@
+
 def condition_act(n):
     if n%2==1:
         print("Weird")
@@ -146,5 +147,19 @@ def nested_list_p1():
     #     if i[1] == min(list2):
     #         print(i[0])
     print('\n'.join(sorted(i[0] for i in student if i[1] == min(list2))))
+   
+def mark_avrg(): 
+    n,x =map(int,input().split())
+    marks = []
+    for _ in range(x):
+        marks.append(list(map(float,input().split())))
 
+    mark = list(zip(*marks))
 
+    for i in mark:
+        print(sum(i)/x)
+
+def input_example():
+    x,k = map(int,input().split(" "))
+    print(eval(input()) == k)
+    
