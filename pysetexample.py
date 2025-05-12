@@ -51,16 +51,10 @@ def check_strict_superset():
         print(False)
     
 def py_sort_ex():
-    #!/bin/python3
-
     first_multiple_input = input().rstrip().split()
-
     n = int(first_multiple_input[0])
-
     m = int(first_multiple_input[1])
-
     arr = []
-
     for _ in range(n):
         arr.append(list(map(int, input().rstrip().split())))
 
@@ -75,8 +69,8 @@ def any_or_all_ex():
     arr = list(map(int,input().split()))
     print(all(i>0 for i in arr) and any(str(i)[::-1]==str(i) for i in arr))
     
+    
 line = input()
-
 def sort_func(char = ''):
   if char.islower(): return -3
   if char.isupper(): return -2

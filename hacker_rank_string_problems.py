@@ -154,7 +154,6 @@ def find_angle():
     print(int(round(d)),chr(176),sep="")
     
 def maximize_example():
-    from itertools import product
     N, M = map(int, (input().split()))
     s = list(product(*[map(int, input()[1:].split()) for _ in range(N)]))
     prod = []
@@ -171,8 +170,8 @@ def combination_example():
             print("".join(combo))
 
 def combination_with_replacement_example():
-    S, k = input().split()
-    for c in combinations_with_replacement(sorted(S), int(k)):
+    s, k = input().split()
+    for c in combinations_with_replacement(sorted(s), int(k)):
         print(''.join(c))
 combination_with_replacement_example()
 #combination_example
