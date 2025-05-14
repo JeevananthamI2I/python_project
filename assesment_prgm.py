@@ -28,19 +28,19 @@ students = {
         "marks": {
             "Math": 95,
             "Science": 36,
-            "English": 12
+            "English": 36
         }
     }
 }
 new_student={}
 for key, value in students.items():
-    print(all(list(value["marks"].values())))
+    # print(all(list(value["marks"].values())))
     if "marks" in value and all(i >=35 for i in value["marks"].values()):
             new_student[key]=value
 # print(new_student)
 
 average_marks={student_detail["name"]:(sum(student_detail["marks"].values()) / len(student_detail["marks"])) for student_detail in new_student.values() }
-# print(average_marks)
+print(average_marks)
 ranked_students=sorted(average_marks.items(),key=lambda x:x[1], reverse=True)
 # print(ranked_students)
 student_ranking={}
@@ -52,4 +52,4 @@ for index, (student_name, average) in enumerate(ranked_students):
     previous_average = average
     if index < len(ranked_students) - 1 and ranked_students[index][1] != ranked_students[index + 1][1]:
         rank = index + 2
-print(student_ranking)
+print(student_ranking) 

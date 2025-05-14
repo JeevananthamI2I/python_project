@@ -3,6 +3,8 @@ from collections import namedtuple
 from collections import OrderedDict
 from collections import Counter
 from collections import deque
+from itertools import chain
+from itertools import groupby
 
 
 
@@ -114,6 +116,40 @@ def python_quest_1():
         # print(i*((10**i-1)//9))
 python_quest_1()
 
+def collection_ex1():
+    nested_dict = {'A': {'score': 85, 'age': 25},
+               'B': {'score': 92, 'age': 30},
+               'C': {'score': 78, 'age': 27}}
+    print(dict(sorted(nested_dict.items(), key=lambda x: (x[1]['score']))))
+    
+def dict_ex1():
+    sample_dict = {'apple': 5, 'banana': 2, 'orange': 8, 'grape': 1}
+
+    # Sorting using a for loop
+    sorted_dict = {key: sample_dict[key] for key in sorted(sample_dict, key=sample_dict.get)}
+    print(sorted_dict)
+
+def dict_ex2():
+    nested_dict = {'a': {'key': 3}, 'b': {'key': 1}, 'c': {'key': 2}}
+    sorted_dict = dict(sorted(nested_dict.items(), key=lambda item: item[1]['key']))
+    print(sorted_dict)
+    
+def iter_tool_ex():
+    d = {"a": [1, 2], "b": [3, 4], "c": [5]}
+    res = list(chain(*d.values()))
+
+    print(res)
+    
+def dict_ex_3():
+    d = namedtuple("d", "Name")
+    li = [d("jeeva"), d("lokesh"), d("vasanth")]
+    li.sort(key=lambda x: x.Name)
+    grouped = groupby(li, key=lambda x: x.Name)
+    for key, group in grouped:
+        for item in group:
+            print({'Name': item.Name})
+dict_ex2()
+iter_tool_ex()
 # set_difference_ex()
 # set_intersection_ex()
 # set_or_example()
