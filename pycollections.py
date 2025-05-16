@@ -114,7 +114,7 @@ def python_quest_1():
         print("iiii",i)
         print((10**i-1)//9)
         # print(i*((10**i-1)//9))
-python_quest_1()
+# python_quest_1()
 
 def collection_ex1():
     nested_dict = {'A': {'score': 85, 'age': 25},
@@ -148,8 +148,8 @@ def dict_ex_3():
     for key, group in grouped:
         for item in group:
             print({'Name': item.Name})
-dict_ex2()
-iter_tool_ex()
+# # dict_ex2()
+# iter_tool_ex()
 # set_difference_ex()
 # set_intersection_ex()
 # set_or_example()
@@ -159,3 +159,28 @@ iter_tool_ex()
 # deque_example()
 # named_tuple_example()
 # ordered_dict_example()
+
+# import asyncio
+
+# async def main():
+#     print("Hello")
+#     await asyncio.sleep(10)
+#     print("World")
+
+# # asyncio.run(main())
+
+# class Dog:
+#     def speak(self):
+#         print("Woof!")
+
+# class Robot:
+#     def speak(self):
+#         print("Beep bop!")
+
+# def talk(obj):
+#     obj.speak()
+
+# talk(Dog())     # Woof!
+# talk(Robot())   # Beep bop!
+
+print(124121%6)

@@ -5,15 +5,24 @@ def dict_ex1():
     print({key: {k: v} for key, (k, v) in zip(b, a.items())})
 
 dict_ex1()
-# Input : test_dict = {“a” : {“b” : {}}, “d” : {“e” : {}}, “f” : {“g” : {}} 
-# Output : {‘b’: {‘a’: {}}, ‘e’: {‘d’: {}}, ‘g’: {‘f’: {}} Explanation : Nested dictionaries inverted as outer dictionary keys and viz-a-vis. Input : test_dict = {“a” : {“b” : { “c” : {}}}} Output : {‘c’: {‘b’: {‘a’: {}}}} Explanation : Just a single key, mapping inverted till depth.
 
-def fib():
-    a, b = 0, 1
-    while True:
-        yield a
-        a, b = b, a + b
-        print("exit")
-f = fib()
-for _ in range(10):
-    print(next(f))
+def sort_nested_dict(d):
+    for key, value in d.items():
+        if isinstance(value, dict):
+            d[key] = sort_nested_dict(value)
+    return dict(sorted(d.items(), key=lambda item: str(item[1]) if not isinstance(item[1], dict) else str(sort_nested_dict(item[1]))))
+
+nested_dict = {'a': {'key': 3}, 'b': {'key': 1},
+               'c': {'key': 2, 'inner': {'z': 3, 'x': 1}}}
+
+sorted_dict = sort_nested_dict(nested_dict)
+print(sorted_dict)
+
+def simple_coroutine():
+    print("Coroutine started")
+    x = yield  
+    print(f"Received: {x}")
+
+coro = simple_coroutine()
+next(coro)        
+coro.send(42)
